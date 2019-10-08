@@ -1,0 +1,36 @@
+<html data-ng-app="myApp">
+    <head>
+        <title>AngularJs directives and data binding</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    </head>
+    <body>
+        <div data-ng-controller="simpleCtrl">
+            Start typing to filter: <input type="text" data-ng-model="name"/>
+            <br />
+            <div>
+                <ul>
+                    <li data-ng-repeat="customer in customers | filter:name" >
+                        {{ customer.name | uppercase }} - {{ customer.city }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            // with second parameter other module dependencies can be injected
+            const app = angular.module('myApp', []);
+            // $scope is bridge between view(html) and controller which is maintained by angularjs  
+            function SimpleController($scope) {
+                $scope.customers = [
+                {name:'siva', city: 'Hyderabad'},
+                {name:'chinna', city: 'Chennai'},
+                {name:'Tukaram', city: 'Mumbai'},
+                {name:'ramesh', city: 'Pune'}
+                ]
+            }
+            // we can also put all a controllers object which includes all the controllers as props
+            app.controller('simpleCtrl', SimpleController)
+            
+        </script>
+    </body>
+</html>

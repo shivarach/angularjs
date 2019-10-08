@@ -1,0 +1,11 @@
+<div >
+        Start typing to filter: <input type="text" data-ng-model="city"/>
+        <br />
+        <div>
+            <ul>
+                <li data-ng-repeat="customer in customers | filter:city" >
+                    {{ customer.name | uppercase }} - {{ customer.city }}
+                </li>
+            </ul>
+        </div>
+</div>

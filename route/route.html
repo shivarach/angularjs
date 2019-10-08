@@ -1,0 +1,55 @@
+<html data-ng-app="myApp">
+    <head>
+        <title>AngularJs directives and data binding</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.js"></script>
+    </head>
+    <body>
+        <!-- Placeholder for views -->
+        <!-- chrome wont allow file protocol so this needs to be server with http-server-->
+        <div data-ng-view=""></div>
+
+        <script>
+            // with second parameter other module dependencies can be injected
+            const app = angular.module('myApp', ['ngRoute']);
+
+            app.config(function($routeProvider) {
+                $routeProvider
+                .when('/', {
+                    controller: 'simpleCtrl',
+                    templateUrl: './view1.html'
+                })
+                .when('/view2', 
+                {
+                    controller: 'simpleCtrl',
+                    templateUrl: './view2.html'
+                })
+                .otherwise({ redirectTo: '/'});
+            });
+
+            // $scope is bridge between view(html) and controller which is maintained by angularjs
+            function SimpleController($scope) {
+
+                $scope.customers = [
+                {name:'siva', city: 'Hyderabad'},
+                {name:'chinna', city: 'Chennai'},
+                {name:'Tukaram', city: 'Mumbai'},
+                {name:'ramesh', city: 'Pune'}
+                ];
+
+                $scope.addCustomer = function () {
+                    $scope.customers.push(
+                        {
+                            name: $scope.newCustomer.name,
+                            city: $scope.newCustomer.city
+                        }
+                    );
+                };
+            };
+
+            // we can also put all a controllers object which includes all the controllers as props
+            app.controller('simpleCtrl', SimpleController)
+            
+        </script>
+    </body>
+</html>

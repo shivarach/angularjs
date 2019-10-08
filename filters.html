@@ -1,0 +1,19 @@
+<html data-ng-app="">
+    <head>
+        <title>AngularJs directives and data binding</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    </head>
+    <body>
+        Start typing to filter: <input type="text" data-ng-model="name"/>
+        <br />
+        <div class="container" data-ng-init="customers=[{name:'siva', city: 'Hyderabad'},
+         {name:'chinna', city: 'Chennai'}, {name:'Tukaram', city: 'Mumbai'}, {name:'ramesh', city: 'Pune'}]">
+        
+            <ul>
+                <li data-ng-repeat="customer in customers | filter:name" >x`
+                    {{ customer.name | uppercase }} - {{ customer.city }}
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
